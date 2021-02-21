@@ -1,7 +1,10 @@
 package ui;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
+import model.Billboard;
 import model.InfrastructureDepartment;
 
 public class InfrastructureDepartmentGUI {
@@ -9,7 +12,22 @@ public class InfrastructureDepartmentGUI {
 	private InfrastructureDepartment infD;
 	
 	@FXML
-	private GridPane mainPane;
+	private VBox mainPane;
+	
+	@FXML
+	private TableView<Billboard> tvBillboardList;
+	
+	@FXML
+	private TableColumn<Billboard, String> tcWidth;
+	
+	@FXML
+	private TableColumn<Billboard, String> tcHeight;
+	
+	@FXML
+	private TableColumn<Billboard, String> tcUsed;
+	
+	@FXML
+	private TableColumn<Billboard, String> tcBrand;
 	
 	public InfrastructureDepartmentGUI(InfrastructureDepartment infD) {
 		setInfD(infD);
