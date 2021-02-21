@@ -31,6 +31,8 @@ public class Main extends Application {
 		primaryStage.setTitle("Billboard Manager");
 		infDGUI.initializeTableView();
 		primaryStage.show();
+		infD.loadBillboard();
+		infDGUI.initializeTableView();
 	}
 
 }

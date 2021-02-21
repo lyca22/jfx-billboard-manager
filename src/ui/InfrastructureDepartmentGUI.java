@@ -1,5 +1,8 @@
 package ui;
 
+import java.io.File;
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +21,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import model.Billboard;
 import model.InfrastructureDepartment;
 
@@ -128,7 +132,71 @@ public class InfrastructureDepartmentGUI {
 	
 	public void addBillboard(double w, double h, boolean iu, String b) {
 		infD.addBillboard(w, h, iu, b);
+		try {
+			infD.saveBillboards();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		initializeTableView();
+	}
+	
+	public void exportDangerReport() {
+		Dialog<String> dialog = new Dialog<>();
+		dialog.setTitle("Export Danger Report");
+		dialog.setHeaderText("Export a new danger report");
+		ButtonType addButtonType = new ButtonType("Export", ButtonData.OK_DONE);
+		dialog.getDialogPane().getButtonTypes().addAll(addButtonType, ButtonType.CANCEL);
+		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(20, 150, 10, 10));
+
+		TextField fileNameText = new TextField();
+		fileNameText.setPromptText("Filename");
+		
+		grid.add(new Label("Filename"), 0, 0);
+		grid.add(fileNameText, 1, 0);
+		
+		dialog.getDialogPane().setContent(grid);
+		
+		dialog.setResultConverter(dialogButton -> {
+		    if (dialogButton == addButtonType && !fileNameText.getText().equals("")) {
+		    	try {
+		    		String fileName = fileNameText.getText();
+		    		String separator = ";";
+		    		infD.exportDangerousBillboardReport("data/"+fileName+".txt", separator);
+			    	System.out.println("Done");
+		    	}catch(Exception e) {
+		    		System.out.println("Exception found");
+		    	}
+		    }
+		    return null;
+		});
+		
+		dialog.showAndWait();
+		
+	}
+	
+	public void importBillboards() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Import Data");
+		File file = fileChooser.showOpenDialog(null);
+		String separator = ";";
+		try {
+			infD.importData(file.getAbsolutePath(), separator);
+			initializeTableView();
+		} catch (IOException e) {
+			System.out.println("IOException found");
+		} catch (NullPointerException npe) {
+			System.out.println("NPE Exception found");
+		} catch (NumberFormatException nfe) {
+			System.out.println("NFE Exception found");
+		}
+		try {
+			infD.saveBillboards();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

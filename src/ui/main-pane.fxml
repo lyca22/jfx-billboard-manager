@@ -10,15 +10,14 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar>
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Import billboards" />
-                  <MenuItem mnemonicParsing="false" text="Export danger report" />
+              <MenuItem mnemonicParsing="false" onAction="#importBillboards" text="Import billboards" />
+                  <MenuItem mnemonicParsing="false" onAction="#exportDangerReport" text="Export danger report" />
                   <MenuItem mnemonicParsing="false" text="Quit" />
             </items>
           </Menu>
