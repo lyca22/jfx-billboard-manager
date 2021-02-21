@@ -54,4 +54,9 @@ public class Billboard implements Serializable {
 		return width*height;
 	}
 	
+	public String getUseText() {
+		String text = isInUse() ? "Yes" : "No";
+		return text;
+	}
+	
 }

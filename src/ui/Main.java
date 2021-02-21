@@ -29,6 +29,7 @@ public class Main extends Application {
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Billboard Manager");
+		infDGUI.initializeTableView();
 		primaryStage.show();
 	}
 

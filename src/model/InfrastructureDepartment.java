@@ -22,7 +22,8 @@ public class InfrastructureDepartment {
 	}
 	
 	public void addBillboard(double w, double h, boolean iu, String b) {
-		
+		Billboard newBillboard = new Billboard(w, h, iu, b);
+		billboards.add(newBillboard);
 	}
 	
 	@SuppressWarnings("unused")
